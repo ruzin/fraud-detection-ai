@@ -22,7 +22,7 @@ A prototype system for document categorization and content extraction using LLM/
 ## Project Structure
 
 ```
-ai-engineer-tech-test/
+fraud-detection-ai/
 ├── backend/
 │   ├── main.py              # FastAPI application
 │   ├── document_processor.py # Main processing logic
@@ -33,8 +33,11 @@ ai-engineer-tech-test/
 │   └── app.py               # Streamlit interface
 ├── shared/
 │   └── models.py            # Pydantic data models
-├── file examples/           # Test documents
-├── requirements.txt         # Dependencies
+├── file examples/           # Test input documents
+├── output/                  # Example JSON output files
+│   ├── job_offer.json       # Job posting analysis result
+│   └── market_place_listing.json # Marketplace listing result
+├── requirements.txt         # Python dependencies
 ├── .env                     # Environment variables
 ├── start_backend.py         # Backend startup script
 └── start_frontend.py        # Frontend startup script

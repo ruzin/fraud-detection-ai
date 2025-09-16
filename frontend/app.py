@@ -20,7 +20,7 @@ def main():
     st.title("📄 Document Categorization & Content Extraction")
     st.markdown("Upload documents to automatically categorize them and extract key information for fraud prevention.")
     
-    st.sidebar.title("📊 System Info")
+    st.sidebar.title("System Info")
     
     with st.expander("ℹ️ Supported File Types", expanded=False):
         st.markdown("""
@@ -55,15 +55,35 @@ def main():
         
         with col2:
             if st.button("🔍 Analyze Document", type="primary"):
-                with st.spinner("Processing document..."):
+                # Show processing status
+                status_placeholder = st.empty()
+                progress_bar = st.progress(0)
+                
+                with status_placeholder:
+                    st.info("📤 Uploading document...")
+                progress_bar.progress(25)
+                
+                with st.spinner("🤖 Analyzing with AI model..."):
+                    status_placeholder.info("🤖 Processing with Claude 3.5 Sonnet...")
+                    progress_bar.progress(50)
+                    
                     result = process_document(uploaded_file)
                     
+                    progress_bar.progress(100)
+                    status_placeholder.success("✅ Analysis complete!")
+                    
                 if result:
+                    # Clear status indicators after a brief moment
+                    import time
+                    time.sleep(1)
+                    status_placeholder.empty()
+                    progress_bar.empty()
+                    
                     display_results(result)
     
     st.sidebar.markdown("---")
     
-    with st.sidebar.expander("🔧 API Health"):
+    with st.sidebar.expander("🔧 API Health", expanded=False):
         if st.button("Check Backend Status"):
             check_backend_health()
 
@@ -91,7 +111,7 @@ def process_document(uploaded_file) -> Optional[Dict[str, Any]]:
         return None
 
 def display_results(result: Dict[str, Any]):
-    st.subheader("📊 Analysis Results")
+    st.subheader("Analysis Results")
     
     if result.get("error"):
         st.error(f"❌ Processing Error: {result['error']}")
@@ -185,8 +205,26 @@ def display_results(result: Dict[str, Any]):
     
     st.markdown("---")
     
-    with st.expander("🔍 Raw JSON Output"):
-        st.json(result)
+    col1, col2 = st.columns([3, 1])
+    
+    with col1:
+        with st.expander("Raw JSON Output"):
+            st.json(result)
+    
+    with col2:
+        st.write("**Export Results:**")
+        
+        # Create JSON download
+        json_str = json.dumps(result, indent=2)
+        filename = f"analysis_{result.get('filename', 'document').replace('.', '_')}.json"
+        
+        st.download_button(
+            label="Download JSON",
+            data=json_str,
+            file_name=filename,
+            mime="application/json",
+            help="Download the analysis results as a JSON file"
+        )
 
 def check_backend_health():
     try:
