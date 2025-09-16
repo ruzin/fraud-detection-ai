@@ -9,40 +9,6 @@ A prototype system for document categorization and content extraction using LLM/
 - **LLM/VLM**: OpenRouter API (Claude 3.5 Sonnet)
 - **File Processing**: PDF text extraction + image preprocessing
 
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│  Streamlit UI   │ ──►│   FastAPI API   │ ──►│  OpenRouter LLM │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                              │
-                       ┌─────────────────┐
-                       │ File Processing │
-                       │ (PDF/Images)    │
-                       └─────────────────┘
-```
-## Project Structure
-
-```
-fraud-detection-ai/
-├── backend/
-│   ├── main.py              # FastAPI application
-│   ├── document_processor.py # Main processing logic
-│   ├── file_processor.py    # File handling utilities  
-│   ├── llm_client.py        # OpenRouter integration
-│   └── config.py            # Configuration management
-├── frontend/
-│   └── app.py               # Streamlit interface
-├── shared/
-│   └── models.py            # Pydantic data models
-├── file examples/           # Test input documents
-├── output/                  # Example JSON output files
-│   ├── job_offer.json       # Job posting analysis result
-│   └── market_place_listing.json # Marketplace listing result
-├── requirements.txt         # Python dependencies
-├── .env                     # Environment variables
-├── start_backend.py         # Backend startup script
-└── start_frontend.py        # Frontend startup script
-```
-
 ## Quick Start
 
 ### 1. Setup Environment
@@ -53,14 +19,22 @@ cd ai-engineer-tech-test
 # Activate virtual environment
 source venv/bin/activate
 
-# Install dependencies (if not already done)
+# Install dependencies
 pip install -r requirements.txt
 ```
 
 ### 2. Configure API Key
-Update `.env` with your OpenRouter API key:
+Create a `.env` with your OpenRouter API key and base url and ports as seen below:
 ```bash
 OPENROUTER_API_KEY=your_key_here
+OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
+
+# Backend Configuration  
+BACKEND_HOST=localhost
+BACKEND_PORT=8000
+
+# Frontend Configuration
+FRONTEND_PORT=8501
 ```
 
 ### 3. Start Services
@@ -124,24 +98,12 @@ python start_frontend.py
 5. **Single File Processing**: No batch processing support
 
 ## Future Improvements
-
-### Short Term
-- [ ] Batch file processing
-- [ ] Processing progress indicators  
-- [ ] Result export (CSV, Excel)
-- [ ] File upload validation improvements
-
-### Medium Term  
-- [ ] Response caching layer
-- [ ] Multiple model comparison
-- [ ] Custom extraction templates
-- [ ] Advanced fraud detection rules
-
-### Long Term
-- [ ] Real-time processing webhooks
-- [ ] ML model fine-tuning
-- [ ] Integration with document management systems
-- [ ] Advanced analytics dashboard
+- Batch file processing
+- Response caching layer
+- model fine-tuning
+- analytics dashboard
+- Model router
+- Response Caching with redis
 
 ## Processing Pipeline
 
@@ -170,35 +132,6 @@ python start_frontend.py
 - **Temperature**: `0.1` (low for consistent, deterministic output)
 - **Max Tokens**: `2048` (prevents runaway responses)
 
-### System Prompt
-The model uses a structured prompt focused on fraud prevention:
-
-```
-You are a document analysis expert specializing in categorization and content extraction for fraud prevention.
-
-Analyze the provided document and return a JSON response with the following structure:
-{
-    "category": "one of: invoice, marketplace_listing_screenshot, chat_screenshot, website_screenshot, other",
-    "confidence": "float between 0.0 and 1.0",
-    "extracted_content": {
-        "text": "extracted or transcribed text",
-        "key_entities": {
-            "company_names": [], "person_names": [], "amounts": [],
-            "addresses": [], "phone_numbers": [], "email_addresses": [],
-            "urls": [], "product_names": [], "other_relevant": []
-        },
-        "dates": [],
-        "metadata": {
-            "document_type": "more specific type if applicable",
-            "urgency_indicators": [],
-            "fraud_risk_indicators": [],
-            "quality_score": "float between 0.0 and 1.0"
-        }
-    }
-}
-
-Focus on fraud prevention - look for suspicious patterns, inconsistencies, or red flags.
-```
 
 ### Guardrails & Error Handling
 
