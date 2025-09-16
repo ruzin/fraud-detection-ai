@@ -1,0 +1,67 @@
+{
+    "file_id": "a70f158c-ef9d-4afb-848b-a4003e3bfd80",
+    "filename": "chat_screenshot.png",
+    "category": "chat_screenshot",
+    "confidence": 0.95,
+    "extracted_content": {
+        "text": "Telegram chat conversation about a job opportunity",
+        "key_entities": {
+            "company_names": [
+                "ACCIO.com"
+            ],
+            "person_names": [
+                "Olina",
+                "Slava"
+            ],
+            "amounts": [
+                "$500",
+                "$1,500",
+                "$2,000",
+                "4,000 USDT"
+            ],
+            "addresses": [],
+            "phone_numbers": [
+                "+44 73 7761 8918"
+            ],
+            "email_addresses": [],
+            "urls": [
+                "www.accio.com"
+            ],
+            "product_names": [],
+            "other_relevant": [
+                "PEINBL06 (code)"
+            ]
+        },
+        "dates": [
+            "April 28"
+        ],
+        "metadata": {
+            "document_type": "job recruitment chat",
+            "urgency_indicators": [
+                "part-time job",
+                "commission-based"
+            ],
+            "fraud_risk_indicators": [
+                "Unsolicited job offer",
+                "Promise of high earnings",
+                "Cryptocurrency payment (USDT)",
+                "Vague job description",
+                "Minimal skill requirements",
+                "Tiered payment structure",
+                "Requires consecutive days of work for payment",
+                "Unknown company",
+                "Job offer via Telegram"
+            ],
+            "quality_score": 0.9
+        },
+        "file_info": {
+            "filename": "chat_screenshot.png",
+            "content_type": "image/png",
+            "file_size": 617327,
+            "is_image": true,
+            "is_pdf": false
+        }
+    },
+    "processing_time": 12.078754186630249,
+    "error": null
+}

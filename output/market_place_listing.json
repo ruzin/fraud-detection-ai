@@ -1,0 +1,55 @@
+{
+    "file_id": "2cb77809-540c-4e77-8323-95a3b19ceddc",
+    "filename": "market_place_listing.png",
+    "category": "marketplace_listing_screenshot",
+    "confidence": 0.95,
+    "extracted_content": {
+        "text": "2004 Porsche 911\n£25,000\nListed a week ago in Guildford\nAbout this vehicle:\nDriven 103,400 km\nManual transmission\nExterior colour: Black, Interior colour:\nFuel type: Petrol\nEngine size: -10 L\nGT3 wide body, adjustable suspension, and performance exhaust.",
+        "key_entities": {
+            "company_names": [
+                "Porsche"
+            ],
+            "person_names": [
+                "Ming Luk"
+            ],
+            "amounts": [
+                "£25,000",
+                "103,400 km"
+            ],
+            "addresses": [
+                "Guildford"
+            ],
+            "phone_numbers": [],
+            "email_addresses": [],
+            "urls": [],
+            "product_names": [
+                "2004 Porsche 911"
+            ],
+            "other_relevant": [
+                "K333 EAM (license plate)"
+            ]
+        },
+        "dates": [
+            "2004",
+            "Joined Facebook in 2010"
+        ],
+        "metadata": {
+            "document_type": "Facebook Marketplace car listing",
+            "urgency_indicators": [],
+            "fraud_risk_indicators": [
+                "Limited vehicle details",
+                "High-value vehicle with relatively basic listing"
+            ],
+            "quality_score": 0.8
+        },
+        "file_info": {
+            "filename": "market_place_listing.png",
+            "content_type": "image/png",
+            "file_size": 6174703,
+            "is_image": true,
+            "is_pdf": false
+        }
+    },
+    "processing_time": 11.650357961654663,
+    "error": null
+}
